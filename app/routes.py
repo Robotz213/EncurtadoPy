@@ -24,7 +24,7 @@ def index():
         
         if check_already_shortened:
             
-            flash(f"Url Já encurtada!, 'http://{request.host}/{check_already_shortened.seed}", "error")
+            flash(f"Url Já encurtada!, 'https://{request.host}/{check_already_shortened.seed}", "error")
             return redirect(url_for("index"))   
 
             
@@ -34,7 +34,8 @@ def index():
         db.session.add(gen_seed)
         db.session.commit()
         
-        flash(category = "success", message = f' Your url is http://{request.host}/{new_seed}')
+        origin = request.origin.replace("https://", "").replace("http://", "").split("/")[0]
+        flash(category = "success", message = f' Your url is http://{origin}/{new_seed}')
         return redirect(url_for("index"))        
     
     return render_template("index.html", form = form)
@@ -88,7 +89,7 @@ def encurtar():
 @app.route("/encurtado/<seed>", methods = ["GET"])
 def encurtado(seed: str):
     
-    return 200
+    return jsonify({"success": "200"}), 200
 
 @app.route("/<seed>", methods = ["GET"])
 def ir_encurtado(seed: str):
