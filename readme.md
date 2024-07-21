@@ -58,10 +58,6 @@ DBHost = ""
 
 - [`Forms`](./app/Forms/): Formulários do projeto, sempre mantendo separados por funções.
 
-
-
-
-
 ## Tecnologias Utilizadas: 
 <div style="display: inline_block">
 <br>
@@ -73,3 +69,8 @@ DBHost = ""
 </div>
 
 <br>
+
+
+## Caso queira alternativas, veja o Desafios Backend: 
+
+[Desafio-BackEnd](https://github.com/backend-br/desafios)
