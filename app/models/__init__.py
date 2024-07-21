@@ -7,14 +7,16 @@ from app import db
 with app.app_context():
 
     db.create_all()
-    root = Users.query.filter_by(username = 'test').first()
     
-    if root is None:
+    ## Lógica para criar o usuário JWT
+    # root = Users.query.filter_by(username = 'test').first()
+    
+    # if root is None:
         
-        usuario = Users(
-            username = 'test',
-            senhacrip = "14285714"
-            )
+    #     usuario = Users(
+    #         username = 'test',
+    #         senhacrip = "14285714"
+    #         )
         
-        db.session.add(usuario)
-        db.session.commit()
+    #     db.session.add(usuario)
+    #     db.session.commit()

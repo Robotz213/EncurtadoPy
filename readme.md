@@ -2,9 +2,35 @@
 
 ## Breve descrição
 
-### Encurtador que fiz, basta criar o arquivo ``.env`` com essas informações abaixo.
-### Conforme eu for aprimorando o projeto, irei deixar comentários
+#### Encurtador de URL usando Python / Flask / MySQL no backend para cadastro e registro de URL encurtadas.
+#### USei Bootstrap para fazer a interface Web para usuários e autenticação JWT para caso queira fazer o próprio Front
 
+
+
+## Como configurar?
+
+#### Instalação do `venv (Virtual Environment)`
+> Caso opte por usar um nome personalizado, adicionar o mesmo no `.gitignore` para a pasta não subir para o repositório
+> "xy" representam a versão do seu Python 3 (exemplo: python3.10/3.11/3.12).
+
+- `python3.xy -m venv .venv` 
+ou
+- `python3.xy -m venv .{nomepersonalizado}` 
+
+#### Instalação das dependências do projeto em [`requirements.txt`](./requirements.txt)
+##### No Windows:
+> Necessário habilitar execução de scripts `.ps1` da [Microsoft](https://learn.microsoft.com/pt-br/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4)
+
+
+- `.venv/Scripts/activate`
+- `python -m pip install -r requirements.txt`
+
+##### No Linux:
+
+- `source .venv/bin/activate`
+- `python -m pip install -r requirements.txt`
+
+#### Criação do arquivo `.env`
 
 ```.env
 
@@ -19,6 +45,22 @@ DBHost = ""
 
 
 ```
+
+## Estrutura do projeto
+
+- [`APP`](./app/): É a pasta onde fica centralizado rotas, formulários e models do Flask
+
+#### A partir de `/app`, teremos:
+- [`Models`](./app/models/): Onde ficam os models e bind's do SQL.
+    - `bases/`: Onde ficam as bases para evitar criação de base para cada SGBD diferente
+    - `sqlite3/`, `mysqld/`, `oracle/`, etc: Onde ficam as binds para os databases respectivos
+
+- [`Forms`](./app/Forms/): Formulários do projeto, sempre mantendo separados por funções, como, por exemplo:
+    - pass
+
+- [`Routes`](./app/routes/): Formulários do projeto, sempre mantendo separados por funções.:
+
+
 
 ## Tecnologias Utilizadas: 
 <div style="display: inline_block">
