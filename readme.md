@@ -75,7 +75,7 @@ DBHost = ""
 
 [Desafio-BackEnd](https://github.com/backend-br/desafios)
 
-## E a URL para visualização
+## URL para visualização
 
 [Encurtador](https://short.robotz.dev)
 
