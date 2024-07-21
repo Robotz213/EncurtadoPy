@@ -52,7 +52,7 @@ DBHost = ""
 
 #### A partir de `/app`, teremos:
 
-- [`Routes`](./app/routes/): Formulários do projeto, sempre mantendo separados por funções.
+- [`Routes`](./app/routes.py): Formulários do projeto, sempre mantendo separados por funções.
 
 - [`Models`](./app/models/): Onde ficam os models e bind's do SQL.
 
