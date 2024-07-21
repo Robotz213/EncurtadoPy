@@ -7,11 +7,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {{ messages[0]}}
-                {% endif %}
-                {% endwith %}
+
+
+                <p> 
+                    {{message}}
+                </p>
+                <br>
+                <p id="copyText">
+                    {{ url }}
+                </p>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                 </div>

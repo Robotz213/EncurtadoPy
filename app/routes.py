@@ -13,6 +13,9 @@ from app.forms import ShortenerForm
 
 from datetime import timedelta
 
+message = ""
+url = ""
+
 @app.route("/", methods = ["GET", "POST"])
 def index():
     
@@ -25,9 +28,10 @@ def index():
         
         if check_already_shortened:
             
-            flash(f"Url Já encurtada!, 'https://{origin}/{check_already_shortened.seed}", "error")
+            message = "This URL has already been shortened"
+            url = f"https://{origin}/{check_already_shortened.seed}"
+            flash(f'Url Já encurtada!, {url}' , "error")
             return redirect(url_for("index"))   
-
             
         new_seed = generate_id()
         gen_seed = Encurtados(url_normal = url, seed = new_seed)
@@ -35,11 +39,13 @@ def index():
         db.session.add(gen_seed)
         db.session.commit()
         
+        message = "Your URL has been shortened successfully!"
+        url = f"https://{origin}/{new_seed}"
+        flash(category = "success", message = f'Your url is {url}')
         
-        flash(category = "success", message = f' Your url is https://{origin}/{new_seed}')
         return redirect(url_for("index"))        
     
-    return render_template("index.html", form = form)
+    return render_template("index.html", form = form, message = message, url = "")
 
 @app.route("/login", methods = ["POST"])
 def login():
