@@ -87,6 +87,7 @@ def encurtar():
     return jsonify({"success": "200"}), 200
         
 @app.route("/encurtado/<seed>", methods = ["GET"])
+@jwt_required()
 def encurtado(seed: str):
     
     return jsonify({"success": "200"}), 200
