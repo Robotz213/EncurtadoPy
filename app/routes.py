@@ -86,7 +86,8 @@ def login():
     return jsonify({"error": "require auth"}), 401
 
 @app.route("/encurtar_url", methods = ["POST"])
-@jwt_required()
+# Descomente o decorator para habilitar a autenticação JWT
+# @jwt_required()
 def encurtar():
     
     ## Pega a url a ser encurtada
