@@ -91,7 +91,7 @@ def login():
 def encurtar():
     
     ## Pega a url a ser encurtada
-    url = request.json.get("url_encurtar", None)
+    url = request.json.get("url", None)
     
     ## Verifica se o request não está em branco
     if url:
@@ -141,4 +141,4 @@ def ir_encurtado(seed: str):
         return redirect(url_normal.url_normal), 301
     
     ## Caso não esteja, retorna erro
-    return jsonify({"error": "Url not found"}), 401
+    return jsonify({"error": "Url not found"}), 404
