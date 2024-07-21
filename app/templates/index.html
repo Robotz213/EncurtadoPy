@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Landing Page - Start Bootstrap Theme</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename = 'assets/favicon.ico' ) }}" />
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
+        integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"
+        type="text/css" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{{ url_for('static', filename = 'css/styles.css' ) }}" rel="stylesheet" />
+
+</head>
+
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-dark bg-dark static-top">
+        <div class="container">
+            <a class="navbar-brand" href="#!">Shortener RobotzDev</a>
+            <a class="btn btn-danger" href="https://robotz.dev">Robotz Dev</a>
+        </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container position-relative">
+            <div class="row justify-content-center">
+                <div class="col-xl-6">
+                    <div class="text-center text-white">
+                        <h1 class="mb-5">Generate your shortened url!</h1>
+                        <form class="form-subscribe" id="contactForm" action="{{ url_for('index') }}" method="post">
+
+                            {{ form.hidden_tag() }}
+                            <div class="row">
+                                <div class="col">
+                                    {{ form.url_encurtar(class="form-control form-control-lg", id="url_encurtar",
+                                    type="text", placeholder="Your URL") }}
+                                </div>
+                                <div class="col-auto">
+                                    {{ form.submit(class="btn btn-primary btn-lg", id="submitButton",
+                                type="submit") }}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <footer class="footer bg-dark fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="mailto:nicholas@robotz.dev">Contact</a></li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; <a href="https://robotz.dev" target="_blank" rel="noopener noreferrer">Robotz Dev</a> 2023. All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item me-4">
+                            <a href="#!"><i class="bi-github fs-3"></i></a>
+                        </li>
+                        <li class="list-inline-item me-4">
+                            <a href="https://robotz.dev"><i class="bi-globe fs-3"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://www.instagram.com/robotz212"><i class="bi-instagram fs-3"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+
+    <!-- Core theme JS-->
+    <script src="{{ url_for('static', filename = 'js/scripts.js ') }}"></script>
+</body>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+
+{% include 'includes/message.html' %}
+
+<script src="{{url_for('static', filename='js/show_modal.js')}}"></script>
+{% endif %}
+{% endwith %}
+
+</html>
