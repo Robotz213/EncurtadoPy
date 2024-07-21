@@ -19,12 +19,13 @@ def index():
     form: Type[FlaskForm] = ShortenerForm()
     if form.validate_on_submit():
         
+        origin = request.origin.replace("https://", "").replace("http://", "").split("/")[0]
         url = form.url_encurtar.data
         check_already_shortened = Encurtados.query.filter(Encurtados.url_normal == url).first()
         
         if check_already_shortened:
             
-            flash(f"Url Já encurtada!, 'https://{request.host}/{check_already_shortened.seed}", "error")
+            flash(f"Url Já encurtada!, 'https://{origin}/{check_already_shortened.seed}", "error")
             return redirect(url_for("index"))   
 
             
@@ -34,8 +35,8 @@ def index():
         db.session.add(gen_seed)
         db.session.commit()
         
-        origin = request.origin.replace("https://", "").replace("http://", "").split("/")[0]
-        flash(category = "success", message = f' Your url is http://{origin}/{new_seed}')
+        
+        flash(category = "success", message = f' Your url is https://{origin}/{new_seed}')
         return redirect(url_for("index"))        
     
     return render_template("index.html", form = form)
