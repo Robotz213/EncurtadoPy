@@ -16,6 +16,18 @@ from datetime import timedelta
 message = ""
 url = ""
 
+def url_conventer(url: str) -> str:
+    
+    ## Corrige a URL caso ela não possua "https://"
+    
+    if "http://" in url:
+        url = url.replace("http://", "https://")
+        
+    if not "https://" in url:
+        url = "https://" + url
+        
+    return url
+
 @app.route("/", methods = ["GET", "POST"])
 def index():
     
@@ -31,9 +43,7 @@ def index():
         ## no texto, coisa que não ocorre no "request.host"
         
         origin = request.origin.replace("https://", "").replace("http://", "").split("/")[0]
-        url = form.url_encurtar.data
-        if not "https://" in url:
-            url = "https://" + url
+        url = url_conventer(form.url_encurtar.data)
         ## Verifica se a url que o usuário está tentando encurtar já se encontra no servidor
         
         check_already_shortened = Encurtados.query.filter(Encurtados.url_normal == url).first()
@@ -116,8 +126,7 @@ def encurtar():
                             "url": f"https://{origin}/{check_already_shortened.seed}"}), 401
         
 
-        if not "https://" in url:
-            url = "https://" + url
+        url = url_conventer(url)
         ## Caso não esteja, ele gera uma seed para essa url e adiciona no database
         new_seed = generate_id()
         gen_seed = Encurtados(
