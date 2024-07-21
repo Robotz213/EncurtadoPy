@@ -3,15 +3,15 @@
 ## Breve descrição
 
 #### Encurtador de URL usando Python / Flask / MySQL no backend para cadastro e registro de URL encurtadas.
-#### USei Bootstrap para fazer a interface Web para usuários e autenticação JWT para caso queira fazer o próprio Front
+#### Usei Bootstrap para fazer a interface Web para usuários e autenticação JWT para caso queira fazer o próprio Front
 
 
 
 ## Como configurar?
 
 #### Instalação do `venv (Virtual Environment)`
-> Caso opte por usar um nome personalizado, adicionar o mesmo no `.gitignore` para a pasta não subir para o repositório
-> "xy" representam a versão do seu Python 3 (exemplo: python3.10/3.11/3.12).
+> Caso opte por usar um nome personalizado, adicionar o mesmo no `.gitignore` para a pasta não subir para o repositório.
+> O "xy" representa a versão do seu Python 3 (exemplo: python3.10/3.11/3.12).
 
 - `python3.xy -m venv .venv` 
 ou
