@@ -58,7 +58,7 @@ DBHost = ""
 - [`Forms`](./app/Forms/): Formulários do projeto, sempre mantendo separados por funções, como, por exemplo:
     - pass
 
-- [`Routes`](./app/routes/): Formulários do projeto, sempre mantendo separados por funções.:
+- [`Routes`](./app/routes/): Formulários do projeto, sempre mantendo separados por funções.
 
 
 
