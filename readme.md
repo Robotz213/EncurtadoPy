@@ -51,14 +51,14 @@ DBHost = ""
 - [`APP`](./app/): É a pasta onde fica centralizado rotas, formulários e models do Flask
 
 #### A partir de `/app`, teremos:
-- [`Models`](./app/models/): Onde ficam os models e bind's do SQL.
-    - `bases/`: Onde ficam as bases para evitar criação de base para cada SGBD diferente
-    - `sqlite3/`, `mysqld/`, `oracle/`, etc: Onde ficam as binds para os databases respectivos
-
-- [`Forms`](./app/Forms/): Formulários do projeto, sempre mantendo separados por funções, como, por exemplo:
-    - pass
 
 - [`Routes`](./app/routes/): Formulários do projeto, sempre mantendo separados por funções.
+
+- [`Models`](./app/models/): Onde ficam os models e bind's do SQL.
+
+- [`Forms`](./app/Forms/): Formulários do projeto, sempre mantendo separados por funções.
+
+
 
 
 
