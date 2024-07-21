@@ -19,7 +19,7 @@ ou
 
 #### Instalação das dependências do projeto em [`requirements.txt`](./requirements.txt)
 ##### No Windows:
-> Necessário habilitar execução de scripts `.ps1` da [Microsoft](https://learn.microsoft.com/pt-br/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4)
+> Necessário habilitar execução de scripts [`.ps1 da Microsoft`](https://learn.microsoft.com/pt-br/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4)
 
 
 - `.venv/Scripts/activate`
