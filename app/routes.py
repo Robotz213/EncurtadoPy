@@ -1,4 +1,4 @@
-from flask import jsonify, request, redirect, render_template, flash, url_for
+from flask import jsonify, request, redirect, render_template, flash, url_for, session
 from flask_jwt_extended import jwt_required 
 from flask_jwt_extended import create_access_token
 
@@ -19,6 +19,7 @@ url = ""
 @app.route("/", methods = ["GET", "POST"])
 def index():
     
+    
     form: Type[FlaskForm] = ShortenerForm()
     if form.validate_on_submit():
         
@@ -28,8 +29,8 @@ def index():
         
         if check_already_shortened:
             
-            message = "This URL has already been shortened"
-            url = f"https://{origin}/{check_already_shortened.seed}"
+            session["message"] = "This URL has already been shortened"
+            session["url"] = f"https://{origin}/{check_already_shortened.seed}"
             flash(f'Url Já encurtada!, {url}' , "error")
             return redirect(url_for("index"))   
             
@@ -39,13 +40,13 @@ def index():
         db.session.add(gen_seed)
         db.session.commit()
         
-        message = "Your URL has been shortened successfully!"
-        url = f"https://{origin}/{new_seed}"
+        session["message"] = "Your URL has been shortened successfully!"
+        session["url"] = f"https://{origin}/{new_seed}"
         flash(category = "success", message = f'Your url is {url}')
         
         return redirect(url_for("index"))        
     
-    return render_template("index.html", form = form, message = message, url = "")
+    return render_template("index.html", form = form, message = session.get("message", ""), url = session.get("url", ""))
 
 @app.route("/login", methods = ["POST"])
 def login():

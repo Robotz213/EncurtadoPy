@@ -7,13 +7,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
-
-                <p> 
-                    {{message}}
-                </p>
-                <br>
-                <p id="copyText">
+                <p class="text-center">{{message}}</p>
+                <p id="copyText" data-bs-toggle="tooltip" data-bs-title="Click to Copy!" class="text-center">
                     {{ url }}
                 </p>
                 <div class="modal-footer">
