@@ -32,7 +32,8 @@ def index():
         
         origin = request.origin.replace("https://", "").replace("http://", "").split("/")[0]
         url = form.url_encurtar.data
-        
+        if not "https://" in url:
+            url = "https://" + url
         ## Verifica se a url que o usuário está tentando encurtar já se encontra no servidor
         
         check_already_shortened = Encurtados.query.filter(Encurtados.url_normal == url).first()
@@ -95,7 +96,7 @@ def encurtar():
     
     ## Verifica se o request não está em branco
     if url:
-    
+        
         ## Formata o Url de origem
             
         ## Fiz dessa forma pois tem casos como o Reverse Proxy
@@ -112,8 +113,11 @@ def encurtar():
             
             ## Caso esteja, ele retorna a url encurtada
             return jsonify({"error": "Url already shortened!",
-                            "url": f"http://{origin}/{check_already_shortened.seed}"}), 401
+                            "url": f"https://{origin}/{check_already_shortened.seed}"}), 401
         
+
+        if not "https://" in url:
+            url = "https://" + url
         ## Caso não esteja, ele gera uma seed para essa url e adiciona no database
         new_seed = generate_id()
         gen_seed = Encurtados(
@@ -124,7 +128,7 @@ def encurtar():
         db.session.commit()
         
         ## Retorna o sucesso
-        return jsonify({"success": f' Your url is http://{origin}/{new_seed}'}), 200
+        return jsonify({"success": f' Your url is https://{origin}/{new_seed}'}), 200
 
     return jsonify({"error": "Requiere 'URL' parameter"}), 401
 
@@ -137,8 +141,9 @@ def ir_encurtado(seed: str):
     
     if url_normal:
         
+        url = url_normal.url_normal
         ## Se cadastrada, redireciona o user para a url que foi encurtada
-        return redirect(url_normal.url_normal), 301
+        return redirect(url), 301
     
     ## Caso não esteja, retorna erro
     return jsonify({"error": "Url not found"}), 404
