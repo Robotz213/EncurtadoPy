@@ -16,6 +16,10 @@ from datetime import timedelta
 message = ""
 url = ""
 
+def without_http(orig: str) -> str:
+    
+    return orig.replace("https://", "").replace("http://", "").split("/")[0]
+
 def url_conventer(url: str) -> str:
     
     ## Corrige a URL caso ela não possua "https://"
@@ -42,7 +46,7 @@ def index():
         ## com o origin não ocorre isso, o lado ruim é que fica com o http/https
         ## no texto, coisa que não ocorre no "request.host"
         
-        origin = request.origin.replace("https://", "").replace("http://", "").split("/")[0]
+        origin = without_http(request.origin)
         url = url_conventer(form.url_encurtar.data)
         ## Verifica se a url que o usuário está tentando encurtar já se encontra no servidor
         
@@ -114,7 +118,7 @@ def encurtar():
         ## com o origin não ocorre isso, o lado ruim é que fica com o http/https
         ## no texto, coisa que não ocorre no "request.host"
         
-        origin = request.origin.replace("https://", "").replace("http://", "").split("/")[0]
+        origin = without_http(request.origin)
             
         ## Verifica se a url que o usuário está tentando encurtar já se encontra no servidor
         check_already_shortened = Encurtados.query.filter(Encurtados.url_normal == url).first()
