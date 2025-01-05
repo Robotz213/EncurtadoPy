@@ -1,4 +1,5 @@
 from datetime import timedelta
+
 from typing import Type
 
 from flask import flash, jsonify, redirect, render_template, request, session, url_for
@@ -10,6 +11,26 @@ from app.forms import ShortenerForm
 from app.misc.gen_seed import generate_id
 from app.models import Encurtados, Users
 
+"""
+This module defines the routes for the URL shortener application.
+
+Routes:
+    - /: Handles the index route for the URL shortener application.
+    - /login: Handles user login and JWT authentication.
+    - /encurtar_url: Shortens a given URL and returns the shortened version.
+    - /<seed>: Redirects to the original URL based on the provided shortened URL seed.
+
+Functions:
+    - without_http(orig: str) -> str: Removes the "http://" or "https://" prefix from a URL.
+    - url_conventer(url: str) -> str: Converts a given URL to use "https://" if it does not already.
+    - index(): Handles the index route for the URL shortener application.
+    - login(): Handles user login and JWT authentication.
+    - encurtar(): Shortens a given URL and returns the shortened version.
+    - ir_encurtado(seed: str): Redirects to the original URL based on the provided shortened URL seed.
+
+"""
+
+
 message = ""
 url = ""
 
@@ -20,6 +41,19 @@ def without_http(orig: str) -> str:
 
 
 def url_conventer(url: str) -> str:
+    """
+    Converts a given URL to use "https://" if it does not already.
+
+    This function checks if the input URL contains "http://". If it does,
+    it replaces "http://" with "https://". If the URL does not contain
+    "https://", it prepends "https://" to the URL.
+
+    Args:
+        url (str): The URL to be converted.
+
+    Returns:
+        str: The converted URL with "https://".
+    """
 
     # Corrige a URL caso ela não possua "https://"
 
@@ -34,7 +68,17 @@ def url_conventer(url: str) -> str:
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    """
+    Handles the index route for the URL shortener application.
 
+    This function processes both GET and POST requests. On a GET request, it renders the index page with a form.
+    On a POST request, it validates the form submission, processes the URL shortening, and handles the following cases:
+    - If the URL has already been shortened, it retrieves the shortened URL and displays a message.
+    - If the URL has not been shortened, it generates a new seed, stores it in the database, and displays the shortened URL.
+
+    Returns:
+        Response: The rendered template for the index page with the form and any messages or shortened URLs.
+    """
     form: Type[FlaskForm] = ShortenerForm()
     if form.validate_on_submit():
 
@@ -84,6 +128,17 @@ def index():
 
 @app.route("/login", methods=["POST"])
 def login():
+    """
+    Handles user login and JWT authentication.
+    This function retrieves the username and password from the request JSON,
+    verifies the credentials against the database, and generates a JWT token
+    if the authentication is successful.
+    Returns:
+        Response: A JSON response containing the JWT token and a 200 status code
+                  if authentication is successful.
+                  A JSON response with an error message and a 401 status code
+                  if authentication fails.
+    """
 
     # Sistema de autenticação JWT
     user = request.json.get("username", None)
@@ -112,6 +167,21 @@ def login():
 # Descomente o decorator para habilitar a autenticação JWT
 # @jwt_required()
 def encurtar():
+    """
+    Shortens a given URL and returns the shortened version.
+    This function handles a POST request containing a JSON payload with a URL to be shortened.
+    It checks if the URL has already been shortened and returns the existing shortened URL if found.
+    If the URL has not been shortened yet, it generates a new shortened URL, stores it in the database,
+    and returns the newly shortened URL.
+    Returns:
+        Response: A JSON response containing either the shortened URL or an error message.
+                  - If the URL is already shortened, returns a JSON response with an error message and the existing shortened URL.
+                  - If the URL is successfully shortened, returns a JSON response with the new shortened URL.
+                  - If the URL parameter is missing, returns a JSON response with an error message.
+    Raises:
+        401 Unauthorized: If the URL parameter is missing or if the URL is already shortened.
+        200 OK: If the URL is successfully shortened.
+    """
 
     # Pega a url a ser encurtada
     url = request.json.get("url", None)
@@ -162,6 +232,17 @@ def encurtar():
 
 @app.route("/<seed>", methods=["GET"])
 def ir_encurtado(seed: str):
+    """
+    Redirects to the original URL based on the provided shortened URL seed.
+    This function checks if the provided seed exists in the database. If it does,
+    it retrieves the corresponding original URL and redirects the user to that URL.
+    If the seed does not exist in the database, it returns a JSON response with an error message.
+    Args:
+        seed (str): The seed string representing the shortened URL.
+    Returns:
+        Response: A Flask redirect response to the original URL with a 301 status code if the seed is found.
+        Response: A JSON response with an error message and a 404 status code if the seed is not found.
+    """
 
     # Verifica se a seed está cadastrada no database
     url_normal = Encurtados.query.filter(Encurtados.seed == seed).first()
