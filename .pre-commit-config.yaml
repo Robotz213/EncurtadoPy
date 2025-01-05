@@ -1,0 +1,50 @@
+repos:
+  # 1. Organiza os imports primeiro
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+
+  # 2. Formata o código depois
+  - repo: https://github.com/psf/black
+    rev: 24.10.0
+    hooks:
+      - id: black
+
+  # 3. Faz linting e correções adicionais no final
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.0
+    hooks:
+      - id: ruff
+        args: ["--fix"]
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.1.1
+    hooks:
+      - id: flake8
+        args:
+          - --max-line-length=88
+          - --ignore=E203,W503,E501
+
+  # bandit linter
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.0
+    hooks:
+      - id: bandit
+        name: bandit
+        description: "Bandit is a tool for finding common security issues in Python code"
+        entry: bandit
+        language: python
+        language_version: python3
+        types: [python]
+        require_serial: true
+        args:
+          - "-c"
+          - "pyproject.toml"
+          - -o
+          - bandit_results.html
+          - -f
+          - html
+          - -s
+          - B404,B603,B105,B605
+        additional_dependencies: ["bandit[toml]"]

@@ -1,64 +1,61 @@
 # EncurtaPy
 
-## Breve descrição
+## Breve Descrição
 
-#### Encurtador de URL usando Python / Flask / MySQL no backend para cadastro e registro de URL encurtadas.
-#### Usei Bootstrap para fazer a interface Web para usuários e autenticação JWT para caso queira fazer o próprio Front
+EncurtaPy é um encurtador de URL desenvolvido utilizando Python, Flask e MySQL no backend para cadastro e registro de URLs encurtadas. A interface web foi construída com Bootstrap, e a autenticação é gerenciada via JWT, permitindo que você crie seu próprio front-end.
 
+## Como Configurar?
 
+### Instalação do Ambiente Virtual (`venv`)
 
-## Como configurar?
+Para criar um ambiente virtual, utilize o comando abaixo. Se optar por um nome personalizado, adicione-o ao `.gitignore` para evitar que a pasta seja enviada ao repositório. O "xy" representa a versão do seu Python 3 (exemplo: python3.10/3.11/3.12).
 
-#### Instalação do `venv (Virtual Environment)`
-> Caso opte por usar um nome personalizado, adicionar o mesmo no `.gitignore` para a pasta não subir para o repositório.
-> O "xy" representa a versão do seu Python 3 (exemplo: python3.10/3.11/3.12).
+- `python3.xy -m venv .venv`
+  ou
+- `python3.xy -m venv .{nomepersonalizado}`
 
-- `python3.xy -m venv .venv` 
-ou
-- `python3.xy -m venv .{nomepersonalizado}` 
+### Instalação das Dependências
 
-#### Instalação das dependências do projeto em [`requirements.txt`](./requirements.txt)
-##### No Windows:
-> Necessário habilitar execução de scripts [`.ps1 da Microsoft`](https://learn.microsoft.com/pt-br/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4)
+As dependências do projeto estão listadas no arquivo [`requirements.txt`](./requirements.txt).
 
+#### No Windows:
 
-- `.venv/Scripts/activate`
-- `python -m pip install -r requirements.txt`
+Para habilitar a execução de scripts, siga as instruções da [documentação da Microsoft](https://learn.microsoft.com/pt-br/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4).
 
-##### No Linux:
+- Ative o ambiente virtual: `.venv/Scripts/activate`
+- Instale as dependências: `python -m pip install -r requirements.txt`
 
-- `source .venv/bin/activate`
-- `python -m pip install -r requirements.txt`
+#### No Linux:
 
-#### Criação do arquivo `.env`
+- Ative o ambiente virtual: `source .venv/bin/activate`
+- Instale as dependências: `python -m pip install -r requirements.txt`
 
-```.env
+### Criação do Arquivo `.env`
 
-## Enviroment
+Crie um arquivo `.env` na raiz do projeto com as seguintes configurações:
+
+```
+## Environment
 
 DEBUG = False
 Database = ""
 DBLogin = ""
 DBPassword = ""
 DBHost = ""
-
-
-
 ```
 
-## Estrutura do projeto
+## Estrutura do Projeto
 
-- [`APP`](./app/): É a pasta onde fica centralizado rotas, formulários e models do Flask
+- [`APP`](./app/): Diretório principal contendo rotas, formulários e models do Flask.
 
-#### A partir de `/app`, teremos:
+### Estrutura Interna do Diretório `/app`:
 
-- [`Routes`](./app/routes.py): Rotas do Projeto, sempre mantendo separados por funções.
+- [`Routes`](./app/routes.py): Arquivo contendo as rotas do projeto, organizadas por funções.
+- [`Models`](./app/models/): Diretório onde estão os models e binds do SQL.
+- [`Forms`](./app/forms/): Diretório contendo os formulários do projeto, organizados por funções.
 
-- [`Models`](./app/models/): Onde ficam os models e bind's do SQL.
+## Tecnologias Utilizadas
 
-- [`Forms`](./app/Forms/): Formulários do projeto, sempre mantendo separados por funções.
-
-## Tecnologias Utilizadas: 
 <div style="display: inline_block">
 <br>
   <img align="center" alt="BOOTSTRAP" src="https://img.shields.io/badge/Bootstrap-20232A?style=for-the-badge&logo=bootstrap&logoColor=61DAFB"/> 
@@ -70,12 +67,10 @@ DBHost = ""
 
 <br>
 
+## Alternativas e Desafios
 
-## Caso queira alternativas, veja o Desafios Backend: 
+Para explorar alternativas e desafios relacionados ao backend, visite o repositório [Desafio-BackEnd](https://github.com/backend-br/desafios).
 
-[Desafio-BackEnd](https://github.com/backend-br/desafios)
+## URL para Visualização
 
-## URL para visualização
-
-[Encurtador](https://short.robotz.dev)
-
+Acesse o encurtador de URLs em [Encurtador](https://short.robotz.dev).
