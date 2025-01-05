@@ -38,6 +38,8 @@ Crie um arquivo `.env` na raiz do projeto com as seguintes configurações:
 ## Environment
 
 DEBUG = False
+
+>> Totalmente Opcional. Caso não tenha, ele usará o Sqlite
 Database = ""
 DBLogin = ""
 DBPassword = ""

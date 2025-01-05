@@ -2,6 +2,7 @@
 bandit_results.html
 CHROMEDRIVER_PATH/
 Docs/
+is_init.txt
 app/Temp/*
 app/templates/Temp
 __pycache__/

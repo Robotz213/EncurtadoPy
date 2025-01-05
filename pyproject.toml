@@ -4,6 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Robotz213 <nicholas@robotz.dev>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -19,6 +20,9 @@ flask-marshmallow = "^1.2.1"
 python-dotenv = "^1.0.1"
 flask-mysqldb = "^2.0.0"
 mysql-connector-python = "^9.1.0"
+eventlet = "^0.38.2"
+flask-talisman = "^1.1.0"
+clear = "^2.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
